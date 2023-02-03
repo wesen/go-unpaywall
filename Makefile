@@ -29,7 +29,7 @@ tag-release:
 
 release:
 	git push origin ${VERSION}
-	GOPROXY=proxy.golang.org go list -m github.com/wesen/XXX@${VERSION}
+	GOPROXY=proxy.golang.org go list -m github.com/wesen/go-unpaywall@${VERSION}
 
 bump-glazed:
 	go get github.com/wesen/glazed@main
