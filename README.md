@@ -1,2 +1,3 @@
-# biberon
-A command-line tool to work with bibliography data
+# go-unpaywall
+
+A wrapper for the [unpaywall API](https://unpaywall.org/products/api)
