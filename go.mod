@@ -3,9 +3,9 @@ module github.com/wesen/go-unpaywall
 go 1.19
 
 require (
+	github.com/go-go-golems/glazed v0.2.4
 	github.com/pkg/errors v0.9.1
 	github.com/spf13/cobra v1.6.1
-	github.com/wesen/glazed v0.2.1
 )
 
 require (
@@ -37,7 +37,7 @@ require (
 	github.com/rivo/uniseg v0.2.0 // indirect
 	github.com/scylladb/termtables v0.0.0-20191203121021-c4c0b6d42ff4 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
-	github.com/yuin/goldmark v1.5.2 // indirect
+	github.com/yuin/goldmark v1.5.4 // indirect
 	github.com/yuin/goldmark-emoji v1.0.1 // indirect
 	golang.org/x/crypto v0.5.0 // indirect
 	golang.org/x/net v0.5.0 // indirect

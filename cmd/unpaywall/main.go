@@ -5,9 +5,9 @@ import (
 	"embed"
 	"encoding/json"
 	"fmt"
+	"github.com/go-go-golems/glazed/pkg/cli"
+	"github.com/go-go-golems/glazed/pkg/help"
 	"github.com/spf13/cobra"
-	"github.com/wesen/glazed/pkg/cli"
-	"github.com/wesen/glazed/pkg/help"
 	"github.com/wesen/go-unpaywall/pkg"
 	"os"
 )
@@ -161,7 +161,7 @@ var docFS embed.FS
 
 func init() {
 	helpSystem := help.NewHelpSystem()
-	err := helpSystem.LoadSectionsFromEmbedFS(docFS, ".")
+	err := helpSystem.LoadSectionsFromFS(docFS, ".")
 	if err != nil {
 		panic(err)
 	}
