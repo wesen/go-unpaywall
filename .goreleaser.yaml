@@ -10,7 +10,7 @@ builds:
   - env:
       - CGO_ENABLED=0
     main: ./cmd/unpaywall
-    binary: program
+    binary: unpaywall
     goos:
       - linux
 # I am not able to test windows at the time
