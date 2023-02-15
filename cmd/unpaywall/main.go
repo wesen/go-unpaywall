@@ -184,11 +184,17 @@ func init() {
 	rootCmd.PersistentFlags().String("base-url", "https://api.unpaywall.org", "base URL for API requests")
 
 	// TODO(manuel, 2023-02-02): Provide better defaults for the output fields
-	cli.AddFlags(lookupCmd, cli.NewFlagsDefaults())
+	err = cli.AddFlags(lookupCmd, cli.NewFlagsDefaults())
+	if err != nil {
+		panic(err)
+	}
 	rootCmd.AddCommand(lookupCmd)
 
 	// TODO(manuel, 2023-02-02): Provide better defaults for the output fields
-	cli.AddFlags(searchCmd, cli.NewFlagsDefaults())
+	err = cli.AddFlags(searchCmd, cli.NewFlagsDefaults())
+	if err != nil {
+		panic(err)
+	}
 	searchCmd.Flags().Int("page", 1, "page number to return")
 	searchCmd.Flags().Bool("only-open-access", false, "only return open access entries")
 	searchCmd.Flags().Bool("only-non-open-access", false, "only return non-open access entries")
