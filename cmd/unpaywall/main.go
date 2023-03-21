@@ -41,7 +41,7 @@ var lookupCmd = &cobra.Command{
 
 		ctx := context.Background()
 
-		gp, of, err := cli.SetupProcessor(cmd)
+		gp, of, err := cli.CreateGlazedProcessorFromCobra(cmd)
 		cobra.CheckErr(err)
 
 		for _, arg := range args {
@@ -115,7 +115,7 @@ var searchCmd = &cobra.Command{
 
 		ctx := context.Background()
 
-		gp, of, err := cli.SetupProcessor(cmd)
+		gp, of, err := cli.CreateGlazedProcessorFromCobra(cmd)
 		cobra.CheckErr(err)
 
 		results, err := c.Search(ctx, req)
@@ -162,36 +162,22 @@ var docFS embed.FS
 func init() {
 	helpSystem := help.NewHelpSystem()
 	err := helpSystem.LoadSectionsFromFS(docFS, ".")
-	if err != nil {
-		panic(err)
-	}
+	cobra.CheckErr(err)
 
-	helpFunc, usageFunc := help.GetCobraHelpUsageFuncs(helpSystem)
-	helpTemplate, usageTemplate := help.GetCobraHelpUsageTemplates(helpSystem)
-
-	_ = usageFunc
-	_ = usageTemplate
-
-	rootCmd.SetHelpFunc(helpFunc)
-	rootCmd.SetUsageFunc(usageFunc)
-	rootCmd.SetHelpTemplate(helpTemplate)
-	rootCmd.SetUsageTemplate(usageTemplate)
-
-	helpCmd := help.NewCobraHelpCommand(helpSystem)
-	rootCmd.SetHelpCommand(helpCmd)
+	helpSystem.SetupCobraRootCommand(rootCmd)
 
 	rootCmd.PersistentFlags().String("email", "", "email address to use for API requests (required)")
 	rootCmd.PersistentFlags().String("base-url", "https://api.unpaywall.org", "base URL for API requests")
 
 	// TODO(manuel, 2023-02-02): Provide better defaults for the output fields
-	err = cli.AddFlags(lookupCmd, cli.NewFlagsDefaults())
+	err = cli.AddGlazedProcessorFlagsToCobraCommand(lookupCmd)
 	if err != nil {
 		panic(err)
 	}
 	rootCmd.AddCommand(lookupCmd)
 
 	// TODO(manuel, 2023-02-02): Provide better defaults for the output fields
-	err = cli.AddFlags(searchCmd, cli.NewFlagsDefaults())
+	err = cli.AddGlazedProcessorFlagsToCobraCommand(searchCmd)
 	if err != nil {
 		panic(err)
 	}
